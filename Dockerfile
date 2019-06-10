@@ -2,11 +2,13 @@ FROM ubuntu:bionic
 
 RUN mkdir app
 
-RUN apt-get -qq -y update && apt-get -y install python3-dev python3-pip && pip3 install virtualenv
+RUN apt-get -qq -y update && apt-get -y install python3-dev python3-pip libpq-dev && pip3 install virtualenv
 
 ADD . /app
 
 WORKDIR /app
+
+RUN pip3 install --upgrade setuptools
 
 RUN virtualenv venv
 
@@ -16,10 +18,8 @@ USER newuser
 
 RUN . venv/bin/activate
 
-COPY requirements.txt ./app
+ADD requirements.txt ./app
 
 RUN pip3 install -r requirements.txt
 
 EXPOSE 8000
-
-CMD python3 manage.py runserver 0.0.0.0:8000

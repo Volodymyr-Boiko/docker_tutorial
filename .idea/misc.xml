@@ -78,5 +78,5 @@
       <textMaps />
     </LinkMapSettings>
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.7 (opencv_tutorial)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.6.7 Docker Compose (web at [/Users/wildchild/Documents/Projects/docker_tutorial/docker_tutorial/docker-compose.yml])" project-jdk-type="Python SDK" />
 </project>
