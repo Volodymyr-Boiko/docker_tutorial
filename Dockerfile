@@ -1,13 +1,25 @@
-FROM python:3.6-alpine3.6
+FROM ubuntu:bionic
 
-RUN apk add --update build-base python3-dev py-pip postgresql-dev openldap-dev
+RUN mkdir app
+
+RUN apt-get -qq -y update && apt-get -y install python3-dev python3-pip libpq-dev && pip3 install virtualenv
 
 ADD . /app
 
 WORKDIR /app
 
-COPY requirements.txt ./app
+RUN pip3 install --upgrade setuptools
 
-RUN pip install -r requirements.txt
+RUN virtualenv venv
+
+RUN groupadd -g 2000 newuser && useradd -m -u 2001 -g newuser newuser
+
+USER newuser
+
+RUN . venv/bin/activate
+
+ADD requirements.txt ./app
+
+RUN pip3 install -r requirements.txt
 
 EXPOSE 8000
